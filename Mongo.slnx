@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/FrontEnd/" />
+  <Folder Name="/Gateway/" />
+  <Folder Name="/Integrations/" />
+  <Folder Name="/Services/">
+    <Project Path="Mongo.Services.CouponApi/Mongo.Services.CouponApi.csproj" />
+  </Folder>
+</Solution>
