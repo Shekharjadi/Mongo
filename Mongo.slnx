@@ -5,6 +5,7 @@
   <Folder Name="/Gateway/" />
   <Folder Name="/Integrations/" />
   <Folder Name="/Services/">
+    <Project Path="Mongo.Services.AuthApi/Mongo.Services.AuthApi.csproj" Id="62473338-d9a2-4109-981e-1514b6d50f86" />
     <Project Path="Mongo.Services.CouponApi/Mongo.Services.CouponApi.csproj" />
   </Folder>
 </Solution>
