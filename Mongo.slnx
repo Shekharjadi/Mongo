@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/FrontEnd/" />
+  <Folder Name="/FrontEnd/">
+    <Project Path="Mongo-web/Mongo-web.csproj" Id="a50ee6b6-bebd-44e8-9db4-ef9d9114058d" />
+  </Folder>
   <Folder Name="/Gateway/" />
   <Folder Name="/Integrations/" />
   <Folder Name="/Services/">
