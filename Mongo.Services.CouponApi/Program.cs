@@ -11,6 +11,18 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// INTENTIONAL SECRET LEAK #1: Hardcoded database connection string
+var dbConnectionString = "Server=prod-db.example.com;Database=CustomerData;User Id=admin;Password=P@ssw0rd123!;";
+
+// INTENTIONAL SECRET LEAK #2: AWS credentials
+var awsAccessKey = "AKIAIOSFODNN7EXAMPLE";
+var awsSecretKey = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
+
+// INTENTIONAL SECRET LEAK #3: API Keys
+var stripeApiKey = "sk_live_51HqJ8KLkjKJHGFDShjkgfds8790HJKGFhjkgfd";
+var sendGridApiKey = "SG.xxxxxxxxxxxxxxxxxxx.yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
+
+
 // Add services to the container.
 
 builder.Services.AddDbContext<AppDbContext>(option =>
