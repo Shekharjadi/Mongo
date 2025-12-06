@@ -37,5 +37,15 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
+  },
+  "SecretLeakWebAPI\": {": null,
+  "environmentVariables": {
+    "ENV_SECRET_1": "EnvSecretValue_123456",
+    "ENV_DB_PASSWORD": "FakeEnvDbPassw0rd999",
+    "AWS_ACCESS_KEY_ID": "AKIAFAKEENVKEY1234",
+    "AWS_SECRET_ACCESS_KEY": "fake-env-secret-key-ABC123456789",
+    "API_TOKEN": "env_token_abcdef123456789"
   }
 }
+  
+
