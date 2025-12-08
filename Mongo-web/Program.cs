@@ -4,7 +4,6 @@ using Mango.Web.Utility;
 using Mango_Web.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Mongo_web.Service.IService;
-using Mango.Web.Service.IService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,14 +19,14 @@ builder.Services.AddHttpClient<ICouponService, CouponService>();
 SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
 //SD.OrderAPIBase = builder.Configuration["ServiceUrls:OrderAPI"];
 //SD.ShoppingCartAPIBase = builder.Configuration["ServiceUrls:ShoppingCartAPI"];
-SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
+//SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 //SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
-builder.Services.AddScoped<ITokenProvider, TokenProvider>();
+//builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<IBaseService, BaseService>();
 //builder.Services.AddScoped<IOrderService, OrderService>();
 //builder.Services.AddScoped<IProductService, ProductService>();
 //builder.Services.AddScoped<ICartService, CartService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+//builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

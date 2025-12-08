@@ -20,7 +20,6 @@ var awsSecretKey = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
 
 // INTENTIONAL SECRET LEAK #3: API Keys
 var stripeApiKey = "sk_live_51HqJ8KLkjKJHGFDShjkgfds8790HJKGFhjkgfd";
-var sendGridApiKey = "SG.xxxxxxxxxxxxxxxxxxx.yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
 
 
 // Add services to the container.
