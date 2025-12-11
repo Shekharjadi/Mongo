@@ -1,14 +1,110 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Mongo_web.Models
+@model List<GitleaksResult>
+
+@{
+    ViewData["Title"] = "Gitleaks Results";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<h2>@ViewData["Title"]</h2>
+
+<div class="container">
+    @if (Model != null && Model.Any())
+    {
+        <!-- Table to display Gitleaks Results -->
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th class="col-8 col-md-2">File</th>
+                    <th class="col-8 col-md-3">Commit</th>
+                    <th class="col-8 col-md-2">Secret</th>
+                    <th class="col-8 col-md-2">Link</th>
+                    <th class="col-8 col-md-2 text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var result in Model)
+                {
+                    <tr>
+                        <td class="col-8 col-md-2 text-wrap">@result.File</td>
+                        <td class="col-8 col-md-3 text-wrap">@result.Commit</td>
+                        <td class="col-8 col-md-2 text-wrap">@result.Secret</td>
+                        <td class="col-8 col-md-2">
+                            <a href="@result.Link" target="_blank">Redirect To GitHubPath</a>
+                        </td>
+                        <td class="col-12 col-md-2 text-center">
+                            <a href="@Url.Action("OpenFile", "Home", new { filePath = result.File })" class="btn btn-info btn-sm" target="_blank">Go to File</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-12 text-center">
+                <p>No data available.</p>
+            </div>
+        </div>
+    }
 </div>
 
+<style>
+    /* Table Styling */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-<!-- Hardcoded Jira Token: atlassian_1234567890abcdefghijklmnopqrstuvwxyz -->
-<!-- Hardcoded Datadog Key: dd1234567890abcdef1234567890abcdef -->
-<!-- Hardcoded Sentry DSN: https://1234567890abcdef1234567890@sentry.io/12345 -->
-<!-- Hardcoded New Relic Key: NRII-abcdef1234567890abcdef1234567890 -->
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        font-weight: bold;
+        background-color: #007bff; /* Blue background for header */
+    }
+
+    td {
+        font-size: 0.85rem;
+        word-wrap: break-word; /* Enable word wrapping inside cells */
+    }
+
+    /* Zebra Stripes for Table Rows (Alternating Background) */
+    tr:nth-child(even) {
+    }
+
+ 
+
+    /* Button Styling */
+    .btn-info {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    /* Link Styling */
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    /* Max width to control the column size */
+    .col-md-2 {
+        max-width: 150px; /* Set the maximum width of columns like File, Commit, Secret */
+    }
+
+    .col-md-3 {
+        max-width: 200px; /* Set max width for columns like Commit, Link */
+    }
+
+    /* Ensure the text wraps within smaller columns */
+    .text-wrap {
+        word-wrap: break-word; /* Prevent overflow and wrap long text */
+        overflow-wrap: break-word; /* Add support for other browsers */
+    }
+</style>

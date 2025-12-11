@@ -2,16 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Mongo_web</RootNamespace>
+	 
   </PropertyGroup>
-
+ 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Security.DevOps.Cli.win-x64" Version="0.215.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	  	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
 	  
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
   </ItemGroup>
+ 
+  <ItemGroup>
+    <Folder Include="wwwroot\Secrets\" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <None Include="wwwroot\Secrets\gitleaks_report.csv" />
+    <None Include="wwwroot\Secrets\gitleaks_report.xlsx" />
+  </ItemGroup>
+
+
 
 </Project>
