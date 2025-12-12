@@ -19,11 +19,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\Secrets\" />
   </ItemGroup>
- 
-  <ItemGroup>
-    <None Include="wwwroot\Secrets\gitleaks_report.csv" />
-    <None Include="wwwroot\Secrets\gitleaks_report.xlsx" />
-  </ItemGroup>
 
 
 
