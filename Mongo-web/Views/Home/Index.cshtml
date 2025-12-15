@@ -23,7 +23,6 @@
         <a href="@Url.Action("Index", new { page = 1, sortBy = "Link", searchQuery = Model.SearchQuery })">Link</a>
     </div>
 
-    
     @if (Model.Results != null && Model.Results.Any())
     {
         <!-- Table to display Gitleaks Results -->
@@ -42,13 +41,15 @@
                 {
                     <tr>
                         <td class="col-8 col-md-2 text-wrap">@result.File</td>
-                        <td class="col-8 col-md-3 text-wrap">@result.Commit</td>
-                        <td class="col-8 col-md-2 text-wrap">@result.Secret</td>
+                        <td class="col-8 col-md-3 text-wrap">@MaskString(result.Commit)</td> <!-- Masked Commit -->
+                        <td class="col-8 col-md-2 text-wrap">@MaskString(result.Secret)</td> <!-- Masked Secret -->
                         <td class="col-8 col-md-2">
                             <a href="@result.Link" target="_blank">Redirect To GitHubPath</a>
                         </td>
                         <td class="col-12 col-md-2 text-center">
-                            <a href="@Url.Action("OpenFile", "Home", new { filePath = result.File })" class="btn btn-info btn-sm" target="_blank">Go to File</a>
+                            <a href="javascript:void(0);" class="btn btn-info btn-sm" onclick="openInVS('@result.File')">
+                                Open in VS
+                            </a>
                         </td>
                     </tr>
                 }
@@ -89,6 +90,20 @@
     }
 </div>
 
+<script>
+    function openInVS(filePath) {
+        // Construct the full file path on the local machine
+        const localRepoPath = "C:\\Users\\development\\source\\repos\\Mango-web";  // Adjust to the user's local repo path
+        const fullPath = localRepoPath + "/" + filePath;
+
+        // Call the API to open the file in Visual Studio
+        fetch(`/api/OpenFile?path=${encodeURIComponent(fullPath)}`)
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert('Error opening file: ' + error));
+    }
+</script>
+
 <style>
     /* Table Styling */
     table {
@@ -111,9 +126,7 @@
         word-wrap: break-word; /* Enable word wrapping inside cells */
     }
 
-    /* Zebra Stripes for Table Rows (Alternating Background) */
-    tr:nth-child(even) {
-    }
+  
 
     /* Button Styling */
     .btn-info {
@@ -146,3 +159,27 @@
         overflow-wrap: break-word; /* Add support for other browsers */
     }
 </style>
+
+@functions {
+    // Method to mask string values
+    private string MaskString(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return string.Empty;
+        }
+
+        // Show first 5 characters, then mask the rest with asterisks
+        int visibleLength = 5;
+        int maskedLength = value.Length - visibleLength;
+
+        if (maskedLength > 0)
+        {
+            return value.Substring(0, visibleLength) + new string('*', maskedLength);
+        }
+        else
+        {
+            return value; // If the string is shorter than 5 characters, show it as is
+        }
+    }
+}

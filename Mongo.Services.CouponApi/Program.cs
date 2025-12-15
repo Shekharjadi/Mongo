@@ -59,11 +59,24 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
+
 builder.AddAppAuthetication();
 
 builder.Services.AddAuthorization();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("LocalOnly", policy =>
+    {
+        policy.WithOrigins("https://localhost:7053", "http://localhost:5207") // adjust
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
+
+
+app.UseCors("LocalOnly");
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
@@ -79,21 +92,7 @@ Stripe.StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:Sec
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 //ApplyMigration();
 app.Run();
 
-
-//void ApplyMigration()
-//{
-//    using (var scope = app.Services.CreateScope())
-//    {
-//        var _db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-//        if (_db.Database.GetPendingMigrations().Count() > 0)
-//        {
-//            _db.Database.Migrate();
-//        }
-//    }
-//}
