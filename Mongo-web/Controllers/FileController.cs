@@ -27,7 +27,7 @@ namespace Mongo_web.Controllers
                 ProcessStartInfo processInfo = new ProcessStartInfo
                 {
                     FileName = visualStudioPath,
-                    Arguments = $"\"{solutionPath}\"",
+                    Arguments = $"\"{filePath}\"",
                     CreateNoWindow = true
                 };
 
